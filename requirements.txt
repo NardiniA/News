@@ -1,0 +1,4 @@
+django
+pylint-django
+django-crispy-forms
+pillow

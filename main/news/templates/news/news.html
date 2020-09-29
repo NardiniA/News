@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}
+    News
+{% endblock %}
+
+{% block news %}
+    active
+{% endblock %}
+
+{% block header %}
+    <div class="jumbotron jumbotron-fluid p-5 bg-secondary">
+        <div class="container p-5">
+            <h1 class = "text-white">Jumbotron Text</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <h2 class="text-uppercase font-weight-bold">Search An Article</h2>
+    <form action = "{% url 'searchArticles' %}" method = "GET" class = "my-5">
+        <input class = "form-control m-2" type = "text" name = "q" placeholder="Search..." />
+        <button type = "submit" class = "btn btn-success">Search</button>
+    </form> 
+    <h2 class="text-uppercase font-weight-bold">All Articles</h2>
+    <div class="container">
+        <div class="row">
+            {% for a in articles %}
+                <div class="col-lg-4">
+                    <a href="{% url 'article' a.id %}" class="text-dark" style = "text-decoration: none;">
+                        <div class="card my-2">
+                            <div class="card-body text-center">
+                                <h3 class = "text-uppercase font-weight-bold">{{ a.title }}</h3>
+                                <hr />
+                                <p class="text-muted">{{ a.content|truncatewords_html:15 }}</p>
+                                <a href="#" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </a>        
+                </div>
+            {% empty %}
+
+            {% endfor %}
+        </div>
+    </div>
+    
+{% endblock %}
